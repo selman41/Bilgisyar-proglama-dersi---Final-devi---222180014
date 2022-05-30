@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Wallet
 # Modellerinizi buraya kaydedin.
 class WalletAdmin(admin.ModelAdmin):
+    
+# Burada  işlemleri  ve işlem türleni yapmak için gerekli kodları yazdım.
     fieldsets = [
         ('Transaction Type:',{'fields':['debit_or_credit']}),
         ('Transaction Amount:',{'fields':['transaction_amount']}),
