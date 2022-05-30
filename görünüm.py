@@ -48,7 +48,7 @@ def WalletDetail(request, pk,format = None):
 
 
 def updateHMAC(obj):
-    #HMAC
+    
     '''
     msg = hashlib.md5()
     msg.update(str(obj.id))
@@ -60,7 +60,7 @@ def updateHMAC(obj):
     obj.hmac_or_checksum = msg.hexdigest()
     obj.save()
     '''
-    #New code to generate HMAC using SHA256 algorithm
+    
     message = (str(obj.id) + str(obj.transaction_amount) + str(obj.transaction_time) + str(obj.wallet2store_details)).encode('utf-8')
     secret = (str('x7lsvtrl^&*')).encode('utf-8')
     signature = base64.b64encode(hmac.new(secret, message, digestmod=hashlib.sha256).digest())
@@ -80,7 +80,7 @@ def getAmountinWalletforStore(request,format = None):
             wallet_list = Wallet.objects.filter(wallet2store_details = store_id,debit_or_credit = False)
         except :
             return Response("ERROR! Invalid data field sent in POST. Please try again")
-        #Variable to calculate the sum of the current available amount
+        
         print wallet_list
         current_amount = 0
         curr_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -121,7 +121,7 @@ def createWalletRecord(debit_or_credit,amount,method,remarks,store_id,obj,expiry
     new_wallet_obj.hmac_or_checksum = "temp_HMAC"
     new_wallet_obj.is_deleted = 0
     new_wallet_obj.save()
-    #Saving so that ID for the new transaction is created. It is used in HASHING
+  
     updateHMAC(new_wallet_obj)
 
 
@@ -155,9 +155,8 @@ def createDebitCreditrecord(amount,method,remarks,store_id,expiry_date=None):
                     if(obj.curr_available_amount_if_credit_row >= amount_to_debit):
                         obj.curr_available_amount_if_credit_row -= amount_to_debit
                         obj.save()
-                        #----------------------------
-                        #Creating new debit record
-                        #----------------------------
+                  
+                        
                         new_amount = amount_to_debit
                         createWalletRecord(debit_or_credit,new_amount,method,remarks,store_id,obj)
                         amount_to_debit = 0.0
