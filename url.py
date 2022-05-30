@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
+
+
+# Aşağıda ki kodlar kişinin kullanıcı bilgilerini sağlıyor.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -27,11 +30,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+# Kulanıcının başta kayıt olması için gerekli kodlar.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 
-
+#url için örnekler.
 urlpatterns = [
     url(r'^',include('wallet.urls')),
     url(r'^', include(router.urls)),
