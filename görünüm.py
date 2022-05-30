@@ -131,9 +131,6 @@ def createDebitCreditrecord(amount,method,remarks,store_id,expiry_date=None):
         debit_or_credit = False
         createWalletRecord(debit_or_credit,amount,method,remarks,store_id,None,expiry_date)
         return str("Credit Successful")
-    #*************************************************
-    #DEBIT TRANSACTION METHOD
-    #*************************************************
     elif method == 'Debit' or method == 'debit':
         debit_or_credit = True
         available_amount = 0
