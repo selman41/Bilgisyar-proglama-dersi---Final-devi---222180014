@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='wallet',
             name='transaction_time',
-            field=models.DateTimeField(default=datetime.datetime(2016, 1, 23, 8, 56, 27, 543468)),
+            field=models.DateTimeField(default=datetime.datetime(2022, 1, 23, 8, 56, 27, 543468)),
         ),
     ]
