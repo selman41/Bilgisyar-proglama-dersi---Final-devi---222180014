@@ -4,13 +4,12 @@ from django.db import models
 import datetime
 from django.utils import timezone
 from decimal import Decimal
-# Modellerinizi burda oluşturun.
+# Modellerinizi burada oluşturun.
 
 class Wallet(models.Model):
     debit_or_credit = models.BooleanField(default=False)
     transaction_amount = models.FloatField(default=0.0)
     curr_available_amount_if_credit_row = models.FloatField(default=0.0)
-    #transaction_method_name = models.CharField(max_length=45,default=None)
     remarks = models.CharField(max_length=90,default=None)
     transaction_method_record_unique_id = models.CharField(max_length = 200)
     transaction_time = models.DateTimeField(default=datetime.datetime.now)
